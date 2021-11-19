@@ -1,0 +1,458 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+/*--------------------------------------------------------------------------- Color ---------------------------------------------------------------------------*/
+:root{
+    /*light theme color*/
+    --bright-blue: hsl(220, 98%, 61%);
+    --very-light-gary: hsl(0, 0%, 98%);
+    --very-light-garyish-blue: hsl(236, 33%, 92%);
+    --light-garyish-blue: hsl(233, 11%, 84%);
+    --dark-garyish-blue-light: hsl(236, 9%, 61%);
+    --very-dark-garyish-blue-light: hsl(235, 19%, 35%);  
+
+    /*dark theme color*/
+    --very-dark-blue: hsl(235, 21%, 11%);
+    --very-dark-desaturated-blue: hsl(235, 24%, 19%);
+    --light-garyish-blue-dark: hsl(234, 39%, 85%);
+    --light-garyish-blue-hv: hsl(236, 33%, 92%);
+    --dark-garyish-blue-dark: hsl(234, 11%, 52%);
+    --very-dark-garyish-blue: hsl(233, 14%, 35%);
+    --very-dark-garyish-blue-dark: hsl(237, 14%, 26%);
+}
+
+/*--------------------------------------------------------------------------- Resetting some properties ---------------------------------------------------------------------------*/
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    padding: 0; 
+    overflow: hidden;
+    width: 100vw; 
+    caret-color: hsl(192, 100%, 67%);
+}
+h1,h2,h3,h4,h5,h6,p{
+    margin: 0;
+    padding: 0;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    font-weight: 400;
+}
+button{
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}
+button:focus,
+input:focus{
+    outline: none;
+    border: none;
+}
+input{
+    border: none;
+    background-color: transparent;
+    font-family: 'Josefin Sans', sans-serif;
+    margin: 0;
+    display: block; 
+}
+label{
+    display: block;
+}
+::placeholder{
+    transition: all .2s ease-in-out;
+}
+
+/*--------------------------------------------------------------------------- General ---------------------------------------------------------------------------*/
+body{
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 18px;
+}
+.container{
+    width: 1440px; 
+    margin: 0 auto;
+    position: relative;
+}
+
+/*--------------------------------------------------------------------------- Utility ---------------------------------------------------------------------------*/ 
+.todo--icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative; 
+    width: 60px; 
+    height: 60px;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px; 
+}   
+.todo--icon input{
+    width: 20px;
+    height: 20px; 
+    opacity: 0.01; 
+    position: relative;
+    z-index: 5;
+    cursor: pointer;
+}
+.todo--icon label{
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    z-index: 2;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+} 
+.todo--icon input[type="checkbox"]:checked ~ label{ 
+    background: linear-gradient(135deg, hsl(192, 100%, 67%) 0%,  hsl(280, 87%, 65%)100%); 
+}
+.todo--icon input[type="checkbox"]:checked ~ label svg{
+    display: block;
+}  
+.todo--icon input[type="checkbox"]:not(:checked) ~ label svg{ 
+    display: none;
+}
+.todo--input{
+    width: calc(100% - 60px);
+    height: 60px;
+    position: relative;
+}
+.todo--input input{
+    width: 100%;
+    height:100%;
+    font-size: 18px;  
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+} 
+.active{
+    color: var(--bright-blue)!important
+}
+.none{
+    display: none;
+} 
+.selected input{ 
+    text-decoration: line-through;
+} 
+
+
+/*--------------------------------------------------------------------------- Background image ---------------------------------------------------------------------------*/
+.background-image{
+    width: 1440px;
+    height: 300px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-repeat: no-repeat; 
+}
+
+/*--------------------------------------------------------------------------- DARK THEME ---------------------------------------------------------------------------*/
+.dark{
+    background-color: var(--very-dark-blue);
+}
+.dark .todo--icon,
+.dark .todo--input input,
+.dark .list__text,
+.dark .list__button,
+.dark .todo_list-footer,
+.dark .list-footer__filter,
+.dark .todo__list input,
+.dark .nothing{
+    background-color: var(--very-dark-desaturated-blue);
+} 
+.dark .selected input{ 
+    color: var(--very-dark-garyish-blue)!important; 
+} 
+.dark .list__item-container, 
+.dark .nothing{
+    border-bottom: 1px solid var(--very-dark-garyish-blue-dark);
+}
+.dark .todo--input input,
+.dark .list__text,
+.dark .todo__list input,
+.dark .nothing{  
+    color: var(--light-garyish-blue-dark) ; 
+} 
+.dark input::placeholder{
+    color: var( --dark-garyish-blue-dark);
+}
+.dark input:focus::placeholder{
+    color: var(--light-garyish-blue-hv) ;
+}
+.dark .todo--icon input[type="checkbox"]:not(:checked) ~ label{ 
+    border: 1px solid var(--very-dark-garyish-blue); 
+}
+.dark .todo--icon input[type="checkbox"]:not(:checked):hover ~ label{  
+    border: double 1px transparent;
+    border-radius: 100%;
+    background-image: linear-gradient(var(--very-dark-desaturated-blue), var(--very-dark-desaturated-blue)), radial-gradient(circle at top left, hsl(192, 100%, 67%) 0%,  hsl(280, 87%, 65%)100%);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+}
+.dark .header__icon svg:first-child{
+    display: none;
+}   
+.dark .background-image{
+    background-image: url('./images/bg-desktop-dark.jpg');
+}
+.dark .over .todo--icon ,
+.dark .over .list__button,
+.dark .over .todo--input input,
+.dark .over .list__text{
+    background-color: var(--very-dark-garyish-blue-dark);
+}
+
+/*--------------------------------------------------------------------------- LIGHT THEME --------------------------------------------------------------------------- */ 
+.light,
+.light .todo--icon,
+.light .todo--input input,
+.light .list__text,
+.light .list__button,
+.light .todo_list-footer,
+.light .todo_list-footer span,
+.light .list-footer__filter,
+.light .todo__list span,
+.light .nothing{
+    background-color: #fff;
+} 
+.light input,
+.light input:focus::placeholder,
+.light .list__text,
+.light .todo__list span,
+.light .nothing{
+    color: var( --very-dark-garyish-blue-light);
+}
+.light input::placeholder,
+.light .selected input{
+    color: var(--dark-garyish-blue-light);
+}   
+.light .list__item-container,
+.light .nothing{
+    border-bottom: 1px solid var(--light-garyish-blue);
+} 
+.light .todo--icon input[type="checkbox"]:not(:checked) ~ label{ 
+    border: 1px solid var( --light-garyish-blue); 
+}
+.light .todo--icon input[type="checkbox"]:not(:checked):hover ~ label{  
+    border: double 1px transparent;
+    border-radius: 100%;
+    background-image: linear-gradient(#fff, #fff), radial-gradient(circle at top left, hsl(192, 100%, 67%) 0%,  hsl(280, 87%, 65%)100%);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+}
+.light .header__icon svg:last-child{
+    display: none;
+}
+.light .background-image{
+    background-image: url('./images/bg-desktop-light.jpg');
+}
+.light .over .todo--icon ,
+.light .over .list__button,
+.light .over .todo--input input,
+.light .over .list__text{
+    background-color: var(--very-light-garyish-blue);
+}
+
+/*--------------------------------------------------------------------------- Todo ---------------------------------------------------------------------------*/
+.todo{
+    position: relative;
+    z-index: 2; 
+    padding-top: 80px;
+    width: 540px;
+    margin: 0 auto;
+    
+}
+.todo__header{ 
+    display: flex;
+    justify-content: space-between;
+}
+.header__text{
+    color: #fff;
+    font-size: 42px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 12px;
+}
+.header__icon{
+    cursor: pointer;
+}
+.todo__list-items{
+    margin-top: 30px;
+    box-shadow: 0px 0px 15px 5px rgba(0,0,0, 8%);
+}
+.todo__add{
+    width: 100%;
+    position: relative;
+    margin-top: 30px;
+    display: flex; 
+}  
+.todo__list .todo--icon{
+    border-radius: unset;
+}
+.todo__list .list__item-container:first-child .list__icon{ 
+    border-top-left-radius: 5px;
+}
+.todo__list .list__item-container:first-child .list__button{ 
+    border-top-right-radius: 5px;
+} 
+.list__item-container{
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+.list__text{
+    width: calc(100% - 60px);
+    height: 60px; 
+    font-size: 18px; 
+    display: flex;
+    align-items: center;
+}
+.todo__list span{
+    width: 100%;
+    height: 60px;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+}
+.todo__list input[type="text"]:read-only{
+    cursor: pointer;
+}
+.todo_list-footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 60px;
+    padding: 0 18px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    position: relative;
+}
+.todo__list .nothing{
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.list__item-content{
+    display: flex;
+    width: calc(100% - 60px);
+}
+.list__button{
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center; 
+} 
+.list__item-container svg{ 
+    overflow: unset;
+    transform: scale(0.75);
+    cursor: pointer;
+}
+.todo_list-footer span{
+    font-size: 14px;
+    color: var(--dark-garyish-blue-dark); 
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/*--------------------------------------------------------------------------- Media Query ---------------------------------------------------------------------------*/ 
+
+/*1440px*/
+@media (max-width: 1440px) {
+    .container{
+        width: 100vw;
+    } 
+    .background-image{
+        width: 100vw;
+        background-position: center;
+    } 
+}
+/*576px*/
+@media (max-width: 576px) { 
+    .background-image{
+        background-size: 576px 270px ;
+        height:  195px ;
+    }
+    .dark .background-image{
+        background-image: url('./images/bg-mobile-dark.jpg');
+    }
+    .light .background-image{
+        background-image: url('./images/bg-mobile-light.jpg');
+    }
+    .todo{
+        width: 100%;
+        padding: 40px 20px 0;
+    }  
+    .todo__add{
+        margin-top: 30px;
+    }
+    .todo__list-items{
+        margin-top: 20px;
+    }
+    .todo--input input{ 
+        font-size: 14px;   
+    }
+    .header__text{ 
+        font-size: 24px; 
+    }
+    .list__text{ 
+        font-size: 14px;  
+    } 
+    .todo--icon{ 
+        width: 50px; 
+        height: 50px; 
+    } 
+    .todo--input{
+        width: calc(100% - 50px);
+        height: 50px;
+    } 
+    .list__text{
+        width: calc(100% - 50px);
+        height: 50px;  
+    } 
+    .list__button{ 
+        height: 50px;
+    }
+    .todo--icon label { 
+        top: 13px;
+        left: 13px;
+    }
+    .list__button svg{  
+        transform: scale(0.65);
+    }
+    .todo_list-footer{
+        height: 50px;
+    }
+    .list-footer__counter{
+        order: 1; 
+    }
+    .list-footer__filter{
+        order: 3;
+        position: absolute;
+        left: 0;
+        top: 80px;
+        order: 2;
+        width: 100%;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        box-shadow: 0px 0px 15px 5px rgba(0,0,0, 8%);
+    }
+    .list-footer__clear{
+        order: 3;
+    }
+    .list-footer__filter span{
+        margin-right: 5px;
+    }
+    .todo__list .nothing{
+        height: 50px;
+        font-size: 14px;
+    }
+    
+}
