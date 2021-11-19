@@ -168,12 +168,9 @@ function clearSelectedListOfItems () {
         data = data.filter(function(item) { return item.id !== id })
     })
 
-    //remove active class filters
-    filterButtons.forEach((btn)=>{
-        btn.classList.remove('active')
-    })
-
-    filterButtons[0].classList.add('active')
+    removeActiveClassInFilters()
+    addActiveClassInFilters(0)
+    
     Load(data)
 }
 
@@ -206,6 +203,9 @@ function addNewToDo(e) {
 
         Load(data)
     }
+
+    removeActiveClassInFilters()
+    addActiveClassInFilters(0)
 }
 
 // ------------------------------------------------------- Filter -------------------------------------------------------//
@@ -213,11 +213,8 @@ function filterListItems (index) {
 
    let newData = data;
 
-    //remove active class
-    filterButtons.forEach((btn)=>{
-        btn.classList.remove('active')
-    })
-
+   removeActiveClassInFilters()
+   addActiveClassInFilters(index)
 
     switch (index) {
         // select all
@@ -244,6 +241,17 @@ function filterListItems (index) {
     Load(newData)
 }
 
+function removeActiveClassInFilters(){
+    //remove active class
+    filterButtons.forEach((btn)=>{
+        btn.classList.remove('active')
+    })
+}
+
+function addActiveClassInFilters(index){
+    //is added active class to selected 
+    filterButtons[index].classList.add('active')
+}
 // ------------------------------------------------------- Drag and Drop -------------------------------------------------------//
 function dragStart() { 
     dragStartIndex= +this.dataset.index  
