@@ -103,8 +103,7 @@ function addEventForListItem(){
         item.addEventListener('dragover', dragOver);
         item.addEventListener('drop', dragDrop);
         item.addEventListener('dragenter', dragEnter);
-        item.addEventListener('dragleave', dragLeave);
-
+        item.addEventListener('dragleave', dragLeave);  
 
     })
 }
